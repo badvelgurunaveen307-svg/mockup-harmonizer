@@ -111,14 +111,14 @@ function Browse({ start, who, onSwitch }: { start: string; who: string; onSwitch
       </AnimatePresence>
 
       <section className="relative flex min-h-[90vh] items-end overflow-hidden">
-        <img src={photo.url} alt="" className="absolute right-0 top-0 h-full w-full object-cover object-top opacity-70 grayscale md:w-2/3" />
+        <img src={photo.url} alt="" className="absolute right-0 top-0 h-full w-full object-cover object-[center_15%] opacity-60 grayscale md:w-1/2 md:object-contain md:object-right md:opacity-75" />
         <div className="absolute inset-0 bg-side" />
         <div className="absolute inset-0 bg-fade" />
-        <motion.div initial={{ x: -40, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="relative z-10 max-w-2xl px-6 pb-20 md:px-14">
+        <motion.div initial={{ x: -40, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="relative z-10 max-w-2xl px-6 pb-20 pt-28 md:px-14">
           <p className="text-sm font-bold uppercase tracking-[0.3em] text-primary">A Data Analyst Original</p>
           <h1 className="mt-2 font-display text-6xl leading-none md:text-8xl">{profile.name}</h1>
           <p className="mt-3 text-lg">{profile.tagline}</p>
-          <p className="mt-3 line-clamp-3 text-muted-foreground">{profile.summary}</p>
+          <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground">{profile.summary}</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a href="#projects" className="inline-flex items-center gap-2 rounded-sm bg-foreground px-6 py-3 font-bold text-background hover:opacity-80"><Play size={20} />View Projects</a>
             <a href="#about" className="inline-flex items-center gap-2 rounded-sm bg-secondary/80 px-6 py-3 font-bold hover:bg-accent"><Info size={20} />More Info</a>

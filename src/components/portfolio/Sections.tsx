@@ -137,8 +137,10 @@ export function Contact() {
       if (res.status !== 200) throw new Error(res.text);
       setStatus({ kind: "success", msg: "Thanks! Your message has been sent." });
       setForm({ name: "", email: "", message: "" });
-    } catch {
-      setStatus({ kind: "error", msg: "Sorry, the message couldn't be sent. Please email me directly." });
+    } catch (err) {
+      const detail = (err as { text?: string })?.text ?? (err instanceof Error ? err.message : "");
+      console.error("EmailJS send failed:", err);
+      setStatus({ kind: "error", msg: `Sorry, the message couldn't be sent${detail ? ` (${detail})` : ""}. Please email me directly at ${profile.email}.` });
     }
   }
 

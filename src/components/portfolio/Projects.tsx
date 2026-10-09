@@ -15,8 +15,8 @@ export function ProjectRow({ title, items, onOpen }: { title: string; items: Pro
             onClick={() => onOpen(p)}
             className="group relative flex h-40 w-72 shrink-0 flex-col justify-end overflow-hidden rounded-md bg-card p-4 text-left ring-primary hover:ring-2"
           >
-            <span className="absolute right-3 top-3 font-display text-5xl text-primary/30">{p.tool.split(" ")[0]}</span>
-            <span className="text-xs uppercase tracking-widest text-primary">{p.tool}</span>
+            <span className="absolute right-3 top-3 max-w-[85%] truncate rounded-sm border border-primary/30 bg-primary/10 px-2 py-0.5 font-display text-sm tracking-widest text-primary/80">{p.tool.toUpperCase()}</span>
+            <span className="text-[11px] uppercase tracking-widest text-muted-foreground">{p.category}</span>
             <span className="font-bold leading-tight">{p.title}</span>
             <span className="mt-1 line-clamp-1 text-xs text-muted-foreground">{p.description}</span>
           </motion.button>
