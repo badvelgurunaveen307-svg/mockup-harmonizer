@@ -13,6 +13,8 @@
     "format": "prettier --write .",
     "test": "vitest run",
     "test:watch": "vitest"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "overrides": {
     "rolldown": "1.2.1"
