@@ -135,8 +135,8 @@ export const achievements = [
 ];
 
 export const emailConfig = {
-  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_uri98ji",
-  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_p6dynwb",
-  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "lq11tkF7ar5OI1chN",
+  serviceId: import.meta.env["VITE_EMAILJS_SERVICE_ID"] || "service_uri98ji",
+  templateId: import.meta.env["VITE_EMAILJS_TEMPLATE_ID"] || "template_p6dynwb",
+  publicKey: import.meta.env["VITE_EMAILJS_PUBLIC_KEY"] || "lq11tkF7ar5OI1chN",
   toEmail: "badvelgurunaveen@gmail.com",
 };
