@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { Search, Menu, X, Play, Info, Briefcase, BarChart3, Cpu } from "lucide-react";
+import { Search, Menu, X, Play, Info, Briefcase, BarChart3, Cpu, Download, FileText, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { downloadResume, resume } from "@/lib/resume";
 import { About, Achievements, Certifications, Contact, Education, Skills } from "@/components/portfolio/Sections";
 import { ProjectModal, ProjectRow } from "@/components/portfolio/Projects";
 import { profile, projects, type Project } from "@/data/portfolio";
@@ -14,6 +16,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Data Analyst skilled in SQL, Excel, Power BI and Python. Projects, skills, certifications and contact." },
       { property: "og:title", content: "Guru Naveen Badvel — Data Analyst Portfolio" },
       { property: "og:description", content: "Data Analyst skilled in SQL, Excel, Power BI and Python." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
@@ -72,6 +76,17 @@ function Browse({ start, who, onSwitch }: { start: string; who: string; onSwitch
   const [open, setOpen] = useState<Project | null>(null);
   const [menu, setMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+  const [resumeError, setResumeError] = useState("");
+
+  async function onDownloadResume() {
+    if (downloading) return;
+    setDownloading(true);
+    setResumeError("");
+    try { await downloadResume(); }
+    catch (error) { setResumeError(error instanceof Error ? error.message : "Please try View Resume."); }
+    finally { setDownloading(false); }
+  }
 
   useEffect(() => {
     if (start !== "about") setTimeout(() => document.getElementById(start)?.scrollIntoView(), 300);
@@ -87,12 +102,12 @@ function Browse({ start, who, onSwitch }: { start: string; who: string; onSwitch
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <header className={`fixed inset-x-0 top-0 z-40 flex items-center gap-6 px-6 py-4 transition md:px-14 ${scrolled ? "bg-background" : "bg-gradient-to-b from-background to-transparent"}`}>
+      <header className={`fixed inset-x-0 top-0 z-40 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-4 transition sm:flex md:px-14 ${scrolled ? "bg-background" : "bg-gradient-to-b from-background to-transparent"}`}>
         <span className="font-display text-3xl tracking-wider text-primary">GURU</span>
         <nav className="hidden gap-5 text-sm lg:flex">
           {nav.map((n) => <a key={n} href={`#${n}`} className="capitalize text-muted-foreground hover:text-foreground">{n}</a>)}
         </nav>
-        <div className="ml-auto flex items-center gap-3">
+        <div className="ml-auto flex min-w-0 shrink-0 items-center gap-3">
           <label className="flex items-center gap-2 rounded-sm border border-input bg-background/60 px-3 py-1.5">
             <Search size={16} />
             <input value={q} onChange={(e) => { setQ(e.target.value); document.getElementById("projects")?.scrollIntoView(); }} placeholder="Search projects" className="w-28 bg-transparent text-sm outline-none md:w-44" />
@@ -110,11 +125,11 @@ function Browse({ start, who, onSwitch }: { start: string; who: string; onSwitch
         )}
       </AnimatePresence>
 
-      <section className="relative flex min-h-[90vh] items-end overflow-hidden">
-        <img src={photo.url} alt="" className="absolute right-0 top-0 h-full w-full object-cover object-[center_15%] opacity-60 grayscale md:w-1/2 md:object-contain md:object-right md:opacity-75" />
-        <div className="absolute inset-0 bg-side" />
-        <div className="absolute inset-0 bg-fade" />
-        <motion.div initial={{ x: -40, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="relative z-10 max-w-2xl px-6 pb-20 pt-28 md:px-14">
+      <section className="portfolio-hero relative flex min-h-[90vh] items-end overflow-hidden">
+        <img src={photo.url} alt="Guru Naveen Badvel portrait" className="hero-portrait absolute right-0 top-0 h-full w-full object-contain object-center opacity-75 grayscale md:w-1/2 md:object-right" />
+        <div className="absolute inset-0 hidden bg-side md:block" />
+        <div className="absolute inset-0 hidden bg-fade md:block" />
+        <motion.div initial={{ x: -40, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="hero-copy relative z-10 max-w-2xl px-6 pb-20 pt-28 md:px-14">
           <p className="text-sm font-bold uppercase tracking-[0.3em] text-primary">A Data Analyst Original</p>
           <h1 className="mt-2 font-display text-6xl leading-none md:text-8xl">{profile.name}</h1>
           <p className="mt-3 text-lg">{profile.tagline}</p>
@@ -122,7 +137,10 @@ function Browse({ start, who, onSwitch }: { start: string; who: string; onSwitch
           <div className="mt-6 flex flex-wrap gap-3">
             <a href="#projects" className="inline-flex items-center gap-2 rounded-sm bg-foreground px-6 py-3 font-bold text-background hover:opacity-80"><Play size={20} />View Projects</a>
             <a href="#about" className="inline-flex items-center gap-2 rounded-sm bg-secondary/80 px-6 py-3 font-bold hover:bg-accent"><Info size={20} />More Info</a>
+            <Button onClick={onDownloadResume} disabled={downloading} size="lg" className="h-12 rounded-sm px-6 font-bold">{downloading ? <Loader2 className="animate-spin" /> : <Download />}Download Resume</Button>
+            <Button asChild variant="outline" size="lg" className="h-12 rounded-sm px-6"><a href={resume.url} target="_blank" rel="noopener noreferrer"><FileText />View Resume</a></Button>
           </div>
+          {resumeError && <p role="alert" className="mt-3 text-destructive">{resumeError}</p>}
         </motion.div>
       </section>
 

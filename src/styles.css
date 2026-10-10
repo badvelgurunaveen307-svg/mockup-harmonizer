@@ -109,3 +109,18 @@
 @utility shadow-glow { box-shadow: var(--shadow-glow); }
 @utility no-scrollbar { scrollbar-width: none; &::-webkit-scrollbar { display: none; } }
 html { scroll-behavior: smooth; }
+
+@media (max-width: 767px) {
+  .portfolio-hero { display: block; padding-top: 84px; }
+  .portfolio-hero .hero-portrait {
+    position: relative;
+    inset: auto;
+    display: block;
+    width: min(calc(100% - 48px), 340px);
+    height: auto;
+    margin-inline: auto;
+    object-fit: contain;
+    object-position: center;
+  }
+  .portfolio-hero .hero-copy { padding-top: 24px; padding-bottom: 40px; }
+}

@@ -1,7 +1,8 @@
 import { useState, type FormEvent, type ReactNode } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
-import { Award, GraduationCap, Mail, Phone, Briefcase, Trophy, Send, Loader2 } from "lucide-react";
+import { Award, GraduationCap, Mail, Phone, Briefcase, Trophy, Send, Loader2, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { profile, skills, certifications, education, achievements, emailConfig } from "@/data/portfolio";
 import photo from "@/assets/guru.png.asset.json";
 
@@ -61,10 +62,12 @@ export function Certifications() {
         {certifications.map((c) => (
           <div key={c.title} className="flex gap-4 rounded-md bg-card p-5">
             <Award className="mt-1 shrink-0 text-primary" />
-            <div>
+            <div className="min-w-0 flex-1">
               <h3 className="font-bold">{c.title}</h3>
               <p className="text-sm text-muted-foreground">{c.issuer} · {c.date}</p>
               {c.detail && <p className="mt-2 text-sm text-muted-foreground">{c.detail}</p>}
+              {c.image && <a href={c.url} target="_blank" rel="noopener noreferrer" className="mt-4 block"><img src={c.image} alt="ExcelR Data Analytics certificate for Guru Naveen Badvel" loading="lazy" className="aspect-[4/3] w-full object-contain" /></a>}
+              <Button asChild variant="outline" size="sm" className="mt-4"><a href={c.url} target="_blank" rel="noopener noreferrer"><ExternalLink />View Certificate</a></Button>
             </div>
           </div>
         ))}
