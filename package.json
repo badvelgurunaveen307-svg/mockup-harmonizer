@@ -12,7 +12,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },

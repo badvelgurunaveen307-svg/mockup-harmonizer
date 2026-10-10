@@ -4,7 +4,7 @@ import path from "node:path";
 
 export default defineConfig({
   plugins: [react()],
-  base:"/Guru_Naveen_Badevl"
+  base:"/Guru_Naveen_Badevl",
   test: {
     environment: "jsdom",
     globals: true,
