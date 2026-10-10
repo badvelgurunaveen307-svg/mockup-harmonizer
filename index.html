@@ -64,7 +64,7 @@ section>h2{font-size:clamp(2.2rem,5vw,3rem);margin-bottom:24px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
 .card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:20px}
 #downloadResume{background:var(--red);color:var(--fg)}
-.certificate-image{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;margin-top:16px}.certificate-action{margin-top:16px;border:1px solid var(--border);padding:8px 12px;font-size:.85rem;color:var(--fg)}
+.certificate-action{margin-top:16px;border:1px solid var(--border);padding:8px 12px;font-size:.85rem;color:var(--fg)}
 .card h4{margin-bottom:4px}.card .m{color:var(--muted);font-size:.9rem}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .chip{background:#2a2a2a;border-radius:99px;padding:4px 12px;font-size:.8rem}
@@ -162,7 +162,6 @@ const projects=[
 const skills=[["SQL & Database",["SQL","MySQL","Joins","Aggregations","Data Extraction"]],["BI & Visualization",["Power BI","Power Query","DAX"]],["Excel",["Advanced Excel","Pivot Tables","VLOOKUP","Excel Formulas"]],["Data Analysis",["Data Cleaning","Data Transformation","ETL Processes","Statistical Analysis","Hypothesis Testing"]],["Programming",["Python","Pandas","NumPy"]],["Analytics",["Predictive Modeling","Customer Segmentation","Anomaly Detection"]]];
 const certs=[["Data Science","Internshala Training","Feb 2026 – Sep 2026","Intro to Data Analytics; SQL for Data Analysis; Power BI; MS Excel; Python Data Preparation & Analysis"],["Introduction to Data Analysis Using Python","Google · Coursera","May 2026 – Jun 2026",""],["Data Fundamentals","IBM SkillsBuild","Apr 2026",""],["Data Analytics","ExcelR","May 2025 – Sep 2025",""]];
 const certificateLinks=["https://trainings.internshala.com/s/v/3918178/f7518cfc","https://coursera.org/share/5748bafb5bfa47e865395fe6e4e280da","https://www.credly.com/badges/32e77fa3-7fa5-4186-9afd-911ff5b958a2","https://i.postimg.cc/4yHcqJb9/excel-R.png"];
-const excelrImage="https://id-preview--2bd5a100-8597-4d17-b3e1-6c7a4a6337e9.lovable.app/__l5e/assets-v1/aba4a0eb-5e64-413f-ac99-ac8e604c706e/ExcelR_Certificate.png";
 const resumeUrl="https://id-preview--2bd5a100-8597-4d17-b3e1-6c7a4a6337e9.lovable.app/__l5e/assets-v1/dd659222-8e52-40c0-867f-bd7a3272f6ae/Guru_Naveen_Badvel_Resume.pdf";
 const edu=[["B.Tech, Computer Science & Engineering (Data Science)","Dr. K.V. Subba Reddy Institute of Technology","2022 – 2026","CGPA 7.56/10"],["Senior Secondary (XII), BIEAP, Andhra Pradesh","Sri Venkateswara Junior College","2020 – 2022","CGPA 7.90/10"]];
 const ach=[["TCS CodeVita Season 13","Global Rank 10,006","Problem-solving, logical thinking and programming in a global competitive coding challenge."],["JEE Main","81 Percentile","Analytical and quantitative skills in a national-level engineering entrance exam."]];
@@ -176,7 +175,7 @@ $("heroSum").textContent=profile.summary;$("aboutTxt").textContent=profile.summa
 $("yr").textContent=new Date().getFullYear();
 $("nav").innerHTML=["about","projects","skills","certifications","education","achievements","contact"].map(n=>`<a href="#${n}">${n}</a>`).join("");
 $("skillGrid").innerHTML=skills.map(s=>`<div class="card"><h4>${esc(s[0])}</h4>${chips(s[1])}</div>`).join("");
-$("certGrid").innerHTML=certs.map((c,i)=>`<div class="card"><h4>${esc(c[0])}</h4><p class="m">${esc(c[1])} · ${esc(c[2])}</p>${c[3]?`<p class="m" style="margin-top:8px">${esc(c[3])}</p>`:""}${i===3?`<a href="${certificateLinks[i]}" target="_blank" rel="noopener noreferrer"><img class="certificate-image" src="${excelrImage}" alt="ExcelR Data Analytics certificate for Guru Naveen Badvel" loading="lazy"></a>`:""}<a class="btn certificate-action" href="${certificateLinks[i]}" target="_blank" rel="noopener noreferrer">↗ View Certificate</a></div>`).join("");
+$("certGrid").innerHTML=certs.map((c,i)=>`<div class="card"><h4>${esc(c[0])}</h4><p class="m">${esc(c[1])} · ${esc(c[2])}</p>${c[3]?`<p class="m" style="margin-top:8px">${esc(c[3])}</p>`:""}<a class="btn certificate-action" href="${certificateLinks[i]}" target="_blank" rel="noopener noreferrer">↗ View Certificate</a></div>`).join("");
 $("eduGrid").innerHTML=edu.map(e=>`<div class="card"><h4>${esc(e[0])}</h4><p class="m">${esc(e[1])} · ${esc(e[2])}</p><p class="stat" style="margin-top:6px">${esc(e[3])}</p></div>`).join("");
 $("achGrid").innerHTML=ach.map(a=>`<div class="card"><h4>${esc(a[0])}</h4><p class="stat">${esc(a[1])}</p><p class="m" style="margin-top:6px">${esc(a[2])}</p></div>`).join("");
 

@@ -66,7 +66,6 @@ export function Certifications() {
               <h3 className="font-bold">{c.title}</h3>
               <p className="text-sm text-muted-foreground">{c.issuer} · {c.date}</p>
               {c.detail && <p className="mt-2 text-sm text-muted-foreground">{c.detail}</p>}
-              {c.image && <a href={c.url} target="_blank" rel="noopener noreferrer" className="mt-4 block"><img src={c.image} alt="ExcelR Data Analytics certificate for Guru Naveen Badvel" loading="lazy" className="aspect-[4/3] w-full object-contain" /></a>}
               <Button asChild variant="outline" size="sm" className="mt-4"><a href={c.url} target="_blank" rel="noopener noreferrer"><ExternalLink />View Certificate</a></Button>
             </div>
           </div>
